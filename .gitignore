@@ -1,0 +1,10 @@
+node_modules/
+npm-debug.log*
+.DS_Store
+*.log
+
+# Local tooling (not committed)
+*.local.ps1
+*.local.sh
+*.zip
+dist/

@@ -63,23 +63,23 @@ class Query_Render {
 		$paged       = max( 1, (int) $paged );
 
 		if ( $post_id <= 0 || '' === $instance_id ) {
-			return new \WP_Error( 'ddf_invalid_args', __( 'Invalid filter request.', 'dynamic-filter' ), array( 'status' => 400 ) );
+			return new \WP_Error( 'ddf_invalid_args', __( 'Invalid filter request.', 'wp-dynamic-filter' ), array( 'status' => 400 ) );
 		}
 
 		if ( ! taxonomy_exists( $taxonomy ) ) {
-			return new \WP_Error( 'ddf_invalid_taxonomy', __( 'Taxonomy not found.', 'dynamic-filter' ), array( 'status' => 400 ) );
+			return new \WP_Error( 'ddf_invalid_taxonomy', __( 'Taxonomy not found.', 'wp-dynamic-filter' ), array( 'status' => 400 ) );
 		}
 
 		$tax_obj = get_taxonomy( $taxonomy );
 		if ( ! $tax_obj || empty( $tax_obj->public ) ) {
-			return new \WP_Error( 'ddf_private_taxonomy', __( 'Taxonomy is not public.', 'dynamic-filter' ), array( 'status' => 403 ) );
+			return new \WP_Error( 'ddf_private_taxonomy', __( 'Taxonomy is not public.', 'wp-dynamic-filter' ), array( 'status' => 403 ) );
 		}
 
 		$term_ids = array();
 		foreach ( $term_slugs as $slug ) {
 			$term = get_term_by( 'slug', $slug, $taxonomy );
 			if ( ! $term || is_wp_error( $term ) ) {
-				return new \WP_Error( 'ddf_invalid_term', __( 'Term not found.', 'dynamic-filter' ), array( 'status' => 404 ) );
+				return new \WP_Error( 'ddf_invalid_term', __( 'Term not found.', 'wp-dynamic-filter' ), array( 'status' => 404 ) );
 			}
 			$term_ids[] = (int) $term->term_id;
 		}
@@ -93,12 +93,12 @@ class Query_Render {
 		$found  = self::find_filter_block( $blocks, $instance_id );
 
 		if ( null === $found ) {
-			return new \WP_Error( 'ddf_block_not_found', __( 'Filter block instance not found.', 'dynamic-filter' ), array( 'status' => 404 ) );
+			return new \WP_Error( 'ddf_block_not_found', __( 'Filter block instance not found.', 'wp-dynamic-filter' ), array( 'status' => 404 ) );
 		}
 
 		$query_block = self::find_query_block( $found['innerBlocks'] );
 		if ( null === $query_block ) {
-			return new \WP_Error( 'ddf_query_missing', __( 'No Query Loop found inside the filter block.', 'dynamic-filter' ), array( 'status' => 404 ) );
+			return new \WP_Error( 'ddf_query_missing', __( 'No Query Loop found inside the filter block.', 'wp-dynamic-filter' ), array( 'status' => 404 ) );
 		}
 
 		$modified = self::apply_tax_filter( $query_block, $taxonomy, $term_ids, $paged );
@@ -115,11 +115,11 @@ class Query_Render {
 	public static function get_source_content( $post_id ) {
 		$post = get_post( $post_id );
 		if ( ! $post ) {
-			return new \WP_Error( 'ddf_post_missing', __( 'Source content not found.', 'dynamic-filter' ), array( 'status' => 404 ) );
+			return new \WP_Error( 'ddf_post_missing', __( 'Source content not found.', 'wp-dynamic-filter' ), array( 'status' => 404 ) );
 		}
 
 		if ( ! self::can_read_post( $post ) ) {
-			return new \WP_Error( 'ddf_forbidden', __( 'You cannot view this content.', 'dynamic-filter' ), array( 'status' => 403 ) );
+			return new \WP_Error( 'ddf_forbidden', __( 'You cannot view this content.', 'wp-dynamic-filter' ), array( 'status' => 403 ) );
 		}
 
 		if ( in_array( $post->post_type, array( 'wp_template', 'wp_template_part' ), true ) ) {
@@ -151,19 +151,21 @@ class Query_Render {
 	}
 
 	/**
-	 * Recursively find a dynamic-filter/query block by instanceId.
+	 * Recursively find a filter block by instanceId (current + legacy names).
 	 *
 	 * @param array  $blocks      Parsed blocks.
 	 * @param string $instance_id Target instance.
 	 * @return array|null
 	 */
 	public static function find_filter_block( array $blocks, $instance_id ) {
+		$our_blocks = array( 'wp-dynamic-filter/query', 'dynamic-filter/query' );
+
 		foreach ( $blocks as $block ) {
 			if ( empty( $block['blockName'] ) ) {
 				continue;
 			}
 
-			if ( 'dynamic-filter/query' === $block['blockName'] ) {
+			if ( in_array( $block['blockName'], $our_blocks, true ) ) {
 				$attrs = isset( $block['attrs'] ) && is_array( $block['attrs'] ) ? $block['attrs'] : array();
 				$id    = isset( $attrs['instanceId'] ) ? (string) $attrs['instanceId'] : '';
 				if ( $id === $instance_id ) {

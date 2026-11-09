@@ -10,9 +10,27 @@ namespace DynamicFilter;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Registers dynamic-filter/query and renders filter UI + Query Loop.
+ * Registers wp-dynamic-filter/query (and legacy dynamic-filter/query).
  */
 class Filter_Block {
+
+	/**
+	 * Shared block attributes (legacy registration).
+	 *
+	 * @return array
+	 */
+	private static function attributes() {
+		return array(
+			'instanceId'   => array( 'type' => 'string', 'default' => '' ),
+			'taxonomy'     => array( 'type' => 'string', 'default' => 'category' ),
+			'display'      => array( 'type' => 'string', 'default' => 'buttons' ),
+			'showAll'      => array( 'type' => 'boolean', 'default' => true ),
+			'allLabel'     => array( 'type' => 'string', 'default' => 'All' ),
+			'multiple'     => array( 'type' => 'boolean', 'default' => false ),
+			'showCounts'   => array( 'type' => 'boolean', 'default' => false ),
+			'emptyMessage' => array( 'type' => 'string', 'default' => '' ),
+		);
+	}
 
 	/**
 	 * Register block type.
@@ -22,7 +40,7 @@ class Filter_Block {
 	}
 
 	/**
-	 * Register from block.json + render callback.
+	 * Register from block.json + legacy alias.
 	 */
 	public static function register_block() {
 		$block_json = DDF_PATH . 'blocks/query';
@@ -36,6 +54,19 @@ class Filter_Block {
 				'render_callback' => array( __CLASS__, 'render' ),
 				'editor_script'   => Assets::EDITOR_HANDLE,
 				'editor_style'    => Assets::EDITOR_HANDLE,
+			)
+		);
+
+		// Legacy block name for content saved before the rename.
+		register_block_type(
+			'dynamic-filter/query',
+			array(
+				'api_version'     => 3,
+				'title'           => __( 'Dynamic Filter Query (legacy)', 'wp-dynamic-filter' ),
+				'category'        => 'theme',
+				'render_callback' => array( __CLASS__, 'render' ),
+				'attributes'      => self::attributes(),
+				'supports'        => array( 'html' => false ),
 			)
 		);
 	}
@@ -59,7 +90,7 @@ class Filter_Block {
 		$empty_msg   = isset( $attributes['emptyMessage'] ) ? (string) $attributes['emptyMessage'] : '';
 
 		if ( '' === trim( $all_label ) ) {
-			$all_label = __( 'Tous', 'dynamic-filter' );
+			$all_label = __( 'All', 'wp-dynamic-filter' );
 		}
 
 		if ( ! taxonomy_exists( $taxonomy ) ) {
@@ -105,18 +136,17 @@ class Filter_Block {
 
 		$wrapper_attrs = get_block_wrapper_attributes(
 			array(
-				'class'               => 'ddf-query' . ( $multiple ? ' ddf-query--multiple' : '' ),
-				'data-ddf-instance'   => $instance_id,
-				'data-ddf-taxonomy'   => $taxonomy,
-				'data-ddf-post-id'    => (string) $post_id,
-				'data-ddf-display'    => $display,
-				'data-ddf-multiple'   => $multiple ? '1' : '0',
+				'class'             => 'ddf-query' . ( $multiple ? ' ddf-query--multiple' : '' ),
+				'data-ddf-instance' => $instance_id,
+				'data-ddf-taxonomy' => $taxonomy,
+				'data-ddf-post-id'  => (string) $post_id,
+				'data-ddf-display'  => $display,
+				'data-ddf-multiple' => $multiple ? '1' : '0',
 			)
 		);
 
 		$results = $content;
 
-		// Deep-link: apply tax filter on first paint when URL matches this instance.
 		if ( ! empty( $active_terms ) && $post_id > 0 ) {
 			$filtered = Query_Render::render_filtered_html( $post_id, $instance_id, $taxonomy, $active_terms, 1 );
 			if ( ! is_wp_error( $filtered ) ) {
@@ -160,7 +190,7 @@ class Filter_Block {
 
 		if ( 'select' === $display ) {
 			?>
-			<nav class="ddf-filter ddf-filter--select" aria-label="<?php echo esc_attr__( 'Filtrer par terme', 'dynamic-filter' ); ?>">
+			<nav class="ddf-filter ddf-filter--select" aria-label="<?php echo esc_attr__( 'Filter by term', 'wp-dynamic-filter' ); ?>">
 				<select
 					class="ddf-filter__select"
 					data-ddf-filter-control
@@ -195,7 +225,7 @@ class Filter_Block {
 		}
 
 		?>
-		<nav class="ddf-filter ddf-filter--buttons" aria-label="<?php echo esc_attr__( 'Filtrer par terme', 'dynamic-filter' ); ?>">
+		<nav class="ddf-filter ddf-filter--buttons" aria-label="<?php echo esc_attr__( 'Filter by term', 'wp-dynamic-filter' ); ?>">
 			<ul class="ddf-filter__list">
 				<?php if ( $show_all ) : ?>
 					<li class="ddf-filter__item">

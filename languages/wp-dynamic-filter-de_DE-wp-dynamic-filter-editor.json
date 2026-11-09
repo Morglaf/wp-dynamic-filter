@@ -1,0 +1,96 @@
+{
+    "domain": "wp-dynamic-filter",
+    "locale_data": {
+        "wp-dynamic-filter": {
+            "": {
+                "domain": "wp-dynamic-filter",
+                "lang": "de_DE",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
+            },
+            "WP Dynamic Filter requires WordPress 6.7 or newer.": [
+                "WP Dynamic Filter erfordert WordPress 6.7 oder neuer."
+            ],
+            "Dynamic Filter Query (legacy)": [
+                "Dynamic Filter Query (veraltet)"
+            ],
+            "All": [
+                "Alle"
+            ],
+            "Filter by term": [
+                "Nach Begriff filtern"
+            ],
+            "Invalid security token.": [
+                "Ungültiges Sicherheitstoken."
+            ],
+            "Invalid filter request.": [
+                "Ungültige Filteranfrage."
+            ],
+            "Taxonomy not found.": [
+                "Taxonomie nicht gefunden."
+            ],
+            "Taxonomy is not public.": [
+                "Die Taxonomie ist nicht öffentlich."
+            ],
+            "Term not found.": [
+                "Begriff nicht gefunden."
+            ],
+            "Filter block instance not found.": [
+                "Filter-Block-Instanz nicht gefunden."
+            ],
+            "No Query Loop found inside the filter block.": [
+                "Keine Abfrageschleife im Filter-Block gefunden."
+            ],
+            "Source content not found.": [
+                "Quellinhalte nicht gefunden."
+            ],
+            "You cannot view this content.": [
+                "Sie können diesen Inhalt nicht ansehen."
+            ],
+            "Filter": [
+                "Filter"
+            ],
+            "Place your Query Loop inside (or transform an existing loop). You can remove the default loop and drag yours in.": [
+                "Platzieren Sie Ihre Query Loop darin (oder wandeln Sie eine vorhandene Schleife um). Sie können die Standardschleife entfernen und Ihre eigene hineinziehen."
+            ],
+            "Taxonomy": [
+                "Taxonomie"
+            ],
+            "Display": [
+                "Anzeige"
+            ],
+            "Buttons": [
+                "Schaltflächen"
+            ],
+            "Dropdown": [
+                "Dropdown"
+            ],
+            "Multiple selection": [
+                "Mehrfachauswahl"
+            ],
+            "Allow combining several terms (OR logic).": [
+                "Ermöglicht das Kombinieren mehrerer Begriffe (ODER-Logik)."
+            ],
+            "Show “All” button": [
+                "Schaltfläche „Alle“ anzeigen"
+            ],
+            "“All” button label": [
+                "Beschriftung der Schaltfläche „Alle“"
+            ],
+            "Post counts": [
+                "Beitragsanzahl"
+            ],
+            "Empty results message": [
+                "Nachricht bei leeren Ergebnissen"
+            ],
+            "Categories": [
+                "Kategorien"
+            ],
+            "Tags": [
+                "Schlagwörter"
+            ],
+            "Add or move your Query Loop here.": [
+                "Fügen Sie hier Ihre Abfrageschleife (Query Loop) hinzu oder verschieben Sie sie."
+            ]
+        }
+    }
+}

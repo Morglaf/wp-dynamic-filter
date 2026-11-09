@@ -14,7 +14,8 @@ defined( 'ABSPATH' ) || exit;
  */
 class Rest {
 
-	const NAMESPACE = 'dynamic-filter/v1';
+	const NAMESPACE        = 'wp-dynamic-filter/v1';
+	const NAMESPACE_LEGACY = 'dynamic-filter/v1';
 
 	/**
 	 * Hook routes.
@@ -24,55 +25,62 @@ class Rest {
 	}
 
 	/**
-	 * Register /query endpoint.
+	 * Route arguments shared by primary and legacy namespaces.
+	 *
+	 * @return array
+	 */
+	private static function query_args() {
+		return array(
+			'post_id'     => array(
+				'required'          => true,
+				'type'              => 'integer',
+				'sanitize_callback' => 'absint',
+			),
+			'instance_id' => array(
+				'required'          => true,
+				'type'              => 'string',
+				'sanitize_callback' => 'sanitize_text_field',
+			),
+			'taxonomy'    => array(
+				'required'          => true,
+				'type'              => 'string',
+				'sanitize_callback' => 'sanitize_key',
+			),
+			'terms'       => array(
+				'required'          => false,
+				'type'              => 'array',
+				'items'             => array( 'type' => 'string' ),
+				'default'           => array(),
+				'sanitize_callback' => array( __CLASS__, 'sanitize_terms' ),
+			),
+			'term'        => array(
+				'required'          => false,
+				'type'              => 'string',
+				'default'           => '',
+				'sanitize_callback' => array( __CLASS__, 'sanitize_term_slug' ),
+			),
+			'paged'       => array(
+				'required'          => false,
+				'type'              => 'integer',
+				'default'           => 1,
+				'sanitize_callback' => 'absint',
+			),
+		);
+	}
+
+	/**
+	 * Register /query endpoint (current + legacy namespace).
 	 */
 	public static function register_routes() {
-		register_rest_route(
-			self::NAMESPACE,
-			'/query',
-			array(
-				'methods'             => \WP_REST_Server::CREATABLE,
-				'callback'            => array( __CLASS__, 'handle_query' ),
-				'permission_callback' => array( __CLASS__, 'verify_nonce' ),
-				'args'                => array(
-					'post_id'     => array(
-						'required'          => true,
-						'type'              => 'integer',
-						'sanitize_callback' => 'absint',
-					),
-					'instance_id' => array(
-						'required'          => true,
-						'type'              => 'string',
-						'sanitize_callback' => 'sanitize_text_field',
-					),
-					'taxonomy'    => array(
-						'required'          => true,
-						'type'              => 'string',
-						'sanitize_callback' => 'sanitize_key',
-					),
-					'terms'       => array(
-						'required'          => false,
-						'type'              => 'array',
-						'items'             => array( 'type' => 'string' ),
-						'default'           => array(),
-						'sanitize_callback' => array( __CLASS__, 'sanitize_terms' ),
-					),
-					'term'        => array(
-						'required'          => false,
-						'type'              => 'string',
-						'default'           => '',
-						// Legacy single-term param (avoid sanitize_title REST arity trap).
-						'sanitize_callback' => array( __CLASS__, 'sanitize_term_slug' ),
-					),
-					'paged'       => array(
-						'required'          => false,
-						'type'              => 'integer',
-						'default'           => 1,
-						'sanitize_callback' => 'absint',
-					),
-				),
-			)
+		$route = array(
+			'methods'             => \WP_REST_Server::CREATABLE,
+			'callback'            => array( __CLASS__, 'handle_query' ),
+			'permission_callback' => array( __CLASS__, 'verify_nonce' ),
+			'args'                => self::query_args(),
 		);
+
+		register_rest_route( self::NAMESPACE, '/query', $route );
+		register_rest_route( self::NAMESPACE_LEGACY, '/query', $route );
 	}
 
 	/**
@@ -99,7 +107,7 @@ class Rest {
 	}
 
 	/**
-	 * Require a valid wp_rest nonce (CSRF protection for public HTML endpoint).
+	 * Require a valid wp_rest nonce.
 	 *
 	 * @param \WP_REST_Request $request Request.
 	 * @return bool|\WP_Error
@@ -112,7 +120,7 @@ class Rest {
 		if ( ! $nonce || ! wp_verify_nonce( $nonce, 'wp_rest' ) ) {
 			return new \WP_Error(
 				'ddf_invalid_nonce',
-				__( 'Invalid security token.', 'dynamic-filter' ),
+				__( 'Invalid security token.', 'wp-dynamic-filter' ),
 				array( 'status' => 403 )
 			);
 		}

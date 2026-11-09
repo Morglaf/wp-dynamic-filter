@@ -96,7 +96,7 @@
 			}
 		} catch ( err ) {
 			if ( typeof console !== 'undefined' && console.error ) {
-				console.error( '[dynamic-filter]', err );
+				console.error( '[wp-dynamic-filter]', err );
 			}
 		} finally {
 			results.classList.remove( 'is-loading' );

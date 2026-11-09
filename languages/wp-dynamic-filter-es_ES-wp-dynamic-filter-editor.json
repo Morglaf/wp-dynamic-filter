@@ -1,0 +1,96 @@
+{
+    "domain": "wp-dynamic-filter",
+    "locale_data": {
+        "wp-dynamic-filter": {
+            "": {
+                "domain": "wp-dynamic-filter",
+                "lang": "es_ES",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
+            },
+            "WP Dynamic Filter requires WordPress 6.7 or newer.": [
+                "WP Dynamic Filter requiere WordPress 6.7 o superior."
+            ],
+            "Dynamic Filter Query (legacy)": [
+                "Dynamic Filter Query (heredado)"
+            ],
+            "All": [
+                "Todos"
+            ],
+            "Filter by term": [
+                "Filtrar por término"
+            ],
+            "Invalid security token.": [
+                "Token de seguridad no válido."
+            ],
+            "Invalid filter request.": [
+                "Solicitud de filtro no válida."
+            ],
+            "Taxonomy not found.": [
+                "Taxonomía no encontrada."
+            ],
+            "Taxonomy is not public.": [
+                "La taxonomía no es pública."
+            ],
+            "Term not found.": [
+                "Término no encontrado."
+            ],
+            "Filter block instance not found.": [
+                "No se encontró la instancia del bloque de filtro."
+            ],
+            "No Query Loop found inside the filter block.": [
+                "No se encontró ningún bucle de consulta dentro del bloque de filtro."
+            ],
+            "Source content not found.": [
+                "Contenido de origen no encontrado."
+            ],
+            "You cannot view this content.": [
+                "No puedes ver este contenido."
+            ],
+            "Filter": [
+                "Filtro"
+            ],
+            "Place your Query Loop inside (or transform an existing loop). You can remove the default loop and drag yours in.": [
+                "Coloca tu Query Loop dentro (o transforma un bucle existente). Puedes eliminar el bucle predeterminado y arrastrar el tuyo."
+            ],
+            "Taxonomy": [
+                "Taxonomía"
+            ],
+            "Display": [
+                "Visualización"
+            ],
+            "Buttons": [
+                "Botones"
+            ],
+            "Dropdown": [
+                "Desplegable"
+            ],
+            "Multiple selection": [
+                "Selección múltiple"
+            ],
+            "Allow combining several terms (OR logic).": [
+                "Permite combinar varios términos (lógica O)."
+            ],
+            "Show “All” button": [
+                "Mostrar el botón «Todos»"
+            ],
+            "“All” button label": [
+                "Etiqueta del botón «Todos»"
+            ],
+            "Post counts": [
+                "Contador de entradas"
+            ],
+            "Empty results message": [
+                "Mensaje si no hay resultados"
+            ],
+            "Categories": [
+                "Categorías"
+            ],
+            "Tags": [
+                "Etiquetas"
+            ],
+            "Add or move your Query Loop here.": [
+                "Añade o mueve aquí tu bucle de consulta (Query Loop)."
+            ]
+        }
+    }
+}

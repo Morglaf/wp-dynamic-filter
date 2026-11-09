@@ -1,0 +1,40 @@
+# Development / tooling (not shipped in WordPress.org SVN zip)
+.git
+.gitignore
+.gitattributes
+.cursor
+.vscode
+node_modules
+package.json
+package-lock.json
+npm-debug.log*
+bin
+dist
+*.local.ps1
+*.local.sh
+*.zip
+.DS_Store
+.phpunit.result.cache
+phpunit.xml
+phpcs.xml
+.phpcs.xml
+tests
+e2e
+webpack.config.js
+babel.config.js
+.eslintrc
+.eslintrc.js
+.eslintrc.json
+.prettierrc
+.editorconfig
+
+# Keep source for guideline 4 (human-readable / rebuildable)
+# src/
+# languages/
+# assets/
+# build/
+# includes/
+# blocks/
+
+# WordPress.org marketing assets live in SVN /assets/, not in the plugin zip
+.wordpress-org

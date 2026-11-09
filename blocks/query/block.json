@@ -1,13 +1,13 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "dynamic-filter/query",
+	"name": "wp-dynamic-filter/query",
 	"title": "Dynamic Filter Query",
 	"category": "theme",
 	"icon": "filter",
-	"description": "Conteneur de filtre taxonomique autour d’un Query Loop Gutenberg, avec rechargement AJAX.",
+	"description": "Taxonomy filter container around a Gutenberg Query Loop, with AJAX reload.",
 	"keywords": ["filter", "query", "taxonomy", "ajax", "category"],
-	"textdomain": "dynamic-filter",
+	"textdomain": "wp-dynamic-filter",
 	"attributes": {
 		"instanceId": {
 			"type": "string",
@@ -27,7 +27,7 @@
 		},
 		"allLabel": {
 			"type": "string",
-			"default": "Tous"
+			"default": "All"
 		},
 		"multiple": {
 			"type": "boolean",

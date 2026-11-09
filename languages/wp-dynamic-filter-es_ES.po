@@ -1,0 +1,95 @@
+# Copyright (C) 2026 Morglaf
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Dynamic Filter 1.2.0\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: wp-dynamic-filter\n"
+
+msgid "WP Dynamic Filter requires WordPress 6.7 or newer."
+msgstr "WP Dynamic Filter requiere WordPress 6.7 o superior."
+
+msgid "Dynamic Filter Query (legacy)"
+msgstr "Dynamic Filter Query (heredado)"
+
+msgid "All"
+msgstr "Todos"
+
+msgid "Filter by term"
+msgstr "Filtrar por término"
+
+msgid "Invalid security token."
+msgstr "Token de seguridad no válido."
+
+msgid "Invalid filter request."
+msgstr "Solicitud de filtro no válida."
+
+msgid "Taxonomy not found."
+msgstr "Taxonomía no encontrada."
+
+msgid "Taxonomy is not public."
+msgstr "La taxonomía no es pública."
+
+msgid "Term not found."
+msgstr "Término no encontrado."
+
+msgid "Filter block instance not found."
+msgstr "No se encontró la instancia del bloque de filtro."
+
+msgid "No Query Loop found inside the filter block."
+msgstr "No se encontró ningún bucle de consulta dentro del bloque de filtro."
+
+msgid "Source content not found."
+msgstr "Contenido de origen no encontrado."
+
+msgid "You cannot view this content."
+msgstr "No puedes ver este contenido."
+
+msgid "Filter"
+msgstr "Filtro"
+
+msgid "Place your Query Loop inside (or transform an existing loop). You can remove the default loop and drag yours in."
+msgstr "Coloca tu Query Loop dentro (o transforma un bucle existente). Puedes eliminar el bucle predeterminado y arrastrar el tuyo."
+
+msgid "Taxonomy"
+msgstr "Taxonomía"
+
+msgid "Display"
+msgstr "Visualización"
+
+msgid "Buttons"
+msgstr "Botones"
+
+msgid "Dropdown"
+msgstr "Desplegable"
+
+msgid "Multiple selection"
+msgstr "Selección múltiple"
+
+msgid "Allow combining several terms (OR logic)."
+msgstr "Permite combinar varios términos (lógica O)."
+
+msgid "Show “All” button"
+msgstr "Mostrar el botón «Todos»"
+
+msgid "“All” button label"
+msgstr "Etiqueta del botón «Todos»"
+
+msgid "Post counts"
+msgstr "Contador de entradas"
+
+msgid "Empty results message"
+msgstr "Mensaje si no hay resultados"
+
+msgid "Categories"
+msgstr "Categorías"
+
+msgid "Tags"
+msgstr "Etiquetas"
+
+msgid "Add or move your Query Loop here."
+msgstr "Añade o mueve aquí tu bucle de consulta (Query Loop)."

@@ -1,8 +1,13 @@
 {
-	"name": "dynamic-filter",
-	"version": "1.1.0",
-	"description": "Filtre AJAX Query Loop Gutenberg par taxonomie",
+	"name": "wp-dynamic-filter",
+	"version": "1.2.0",
+	"description": "AJAX taxonomy filters for Gutenberg Query Loops",
 	"author": "Morglaf",
+	"homepage": "https://github.com/Morglaf/wp-dynamic-filter",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Morglaf/wp-dynamic-filter.git"
+	},
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {

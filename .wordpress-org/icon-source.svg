@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Filter">
+  <!-- Duotone-style funnel inspired by SVG Repo duotone-filters-3 -->
+  <path fill="#1e3a5f" d="M64 64h384c17.7 0 28.5 18.5 19.5 33.4L320 288v112c0 8.8-4.5 17-11.9 21.6l-64 40C232.6 468.5 224 464.6 224 456V288L44.5 97.4C35.5 82.5 46.3 64 64 64z"/>
+  <path fill="#4a90d9" opacity="0.85" d="M128 96h256c8.8 0 14.2 9.2 9.7 16.7L288 256v104c0 4.4-2.2 8.5-5.9 10.8l-32 20c-5.7 3.6-13.1 1.6-15.1-4.7L224 360V256L118.3 112.7C113.8 105.2 119.2 96 128 96z"/>
+  <path fill="#ffffff" opacity="0.35" d="M176 128h160c4.4 0 7.1 4.6 4.9 8.3L272 240v72c0 2.2-1.1 4.2-3 5.4l-16 10c-2.9 1.8-6.5.8-7.6-2.3L240 310V240L171.1 136.3C168.9 132.6 171.6 128 176 128z"/>
+</svg>

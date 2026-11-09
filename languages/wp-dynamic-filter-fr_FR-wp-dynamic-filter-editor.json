@@ -1,0 +1,96 @@
+{
+    "domain": "wp-dynamic-filter",
+    "locale_data": {
+        "wp-dynamic-filter": {
+            "": {
+                "domain": "wp-dynamic-filter",
+                "lang": "fr_FR",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
+            },
+            "WP Dynamic Filter requires WordPress 6.7 or newer.": [
+                "WP Dynamic Filter nécessite WordPress 6.7 ou plus récent."
+            ],
+            "Dynamic Filter Query (legacy)": [
+                "Dynamic Filter Query (ancien)"
+            ],
+            "All": [
+                "Tous"
+            ],
+            "Filter by term": [
+                "Filtrer par terme"
+            ],
+            "Invalid security token.": [
+                "Jeton de sécurité invalide."
+            ],
+            "Invalid filter request.": [
+                "Requête de filtre invalide."
+            ],
+            "Taxonomy not found.": [
+                "Taxonomie introuvable."
+            ],
+            "Taxonomy is not public.": [
+                "La taxonomie n’est pas publique."
+            ],
+            "Term not found.": [
+                "Terme introuvable."
+            ],
+            "Filter block instance not found.": [
+                "Instance du bloc filtre introuvable."
+            ],
+            "No Query Loop found inside the filter block.": [
+                "Aucune boucle de requête trouvée dans le bloc filtre."
+            ],
+            "Source content not found.": [
+                "Contenu source introuvable."
+            ],
+            "You cannot view this content.": [
+                "Vous ne pouvez pas voir ce contenu."
+            ],
+            "Filter": [
+                "Filtre"
+            ],
+            "Place your Query Loop inside (or transform an existing loop). You can remove the default loop and drag yours in.": [
+                "Placez votre Query Loop à l’intérieur (ou transformez une boucle existante). Vous pouvez supprimer la boucle par défaut et y glisser la vôtre."
+            ],
+            "Taxonomy": [
+                "Taxonomie"
+            ],
+            "Display": [
+                "Affichage"
+            ],
+            "Buttons": [
+                "Boutons"
+            ],
+            "Dropdown": [
+                "Menu déroulant"
+            ],
+            "Multiple selection": [
+                "Sélection multiple"
+            ],
+            "Allow combining several terms (OR logic).": [
+                "Permet de cumuler plusieurs termes (logique OU)."
+            ],
+            "Show “All” button": [
+                "Afficher le bouton « Tous »"
+            ],
+            "“All” button label": [
+                "Libellé du bouton « Tous »"
+            ],
+            "Post counts": [
+                "Compteur d’articles"
+            ],
+            "Empty results message": [
+                "Message si vide"
+            ],
+            "Categories": [
+                "Catégories"
+            ],
+            "Tags": [
+                "Étiquettes"
+            ],
+            "Add or move your Query Loop here.": [
+                "Ajoutez ou déplacez ici votre boucle de requête (Query Loop)."
+            ]
+        }
+    }
+}

@@ -14,8 +14,8 @@ defined( 'ABSPATH' ) || exit;
  */
 class Assets {
 
-	const EDITOR_HANDLE = 'dynamic-filter-editor';
-	const FRONT_HANDLE  = 'dynamic-filter-front';
+	const EDITOR_HANDLE = 'wp-dynamic-filter-editor';
+	const FRONT_HANDLE  = 'wp-dynamic-filter-front';
 
 	/**
 	 * Hook enqueue.
@@ -24,6 +24,8 @@ class Assets {
 		add_action( 'init', array( __CLASS__, 'register_editor_script' ), 5 );
 		add_action( 'enqueue_block_editor_assets', array( __CLASS__, 'enqueue_editor' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'maybe_enqueue_front' ) );
+		add_filter( 'render_block_wp-dynamic-filter/query', array( __CLASS__, 'mark_front_needed' ), 5, 1 );
+		// Legacy block name.
 		add_filter( 'render_block_dynamic-filter/query', array( __CLASS__, 'mark_front_needed' ), 5, 1 );
 	}
 
@@ -72,7 +74,7 @@ class Assets {
 		}
 
 		if ( function_exists( 'wp_set_script_translations' ) ) {
-			wp_set_script_translations( self::EDITOR_HANDLE, 'dynamic-filter' );
+			wp_set_script_translations( self::EDITOR_HANDLE, DDF_TEXTDOMAIN, DDF_PATH . 'languages' );
 		}
 	}
 
@@ -124,7 +126,10 @@ class Assets {
 	 * Enqueue front assets if the block is present in content.
 	 */
 	public static function maybe_enqueue_front() {
-		if ( is_singular() && has_block( 'dynamic-filter/query' ) ) {
+		if ( ! is_singular() ) {
+			return;
+		}
+		if ( has_block( 'wp-dynamic-filter/query' ) || has_block( 'dynamic-filter/query' ) ) {
 			self::enqueue_front();
 		}
 	}

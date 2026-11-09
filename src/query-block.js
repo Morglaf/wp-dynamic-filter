@@ -1,5 +1,5 @@
 /**
- * Editor UI for dynamic-filter/query container block.
+ * Editor UI for wp-dynamic-filter/query container block.
  */
 import { registerBlockType, createBlock } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
@@ -22,6 +22,8 @@ import apiFetch from '@wordpress/api-fetch';
 import metadata from '../blocks/query/block.json';
 
 const ALLOWED = [ 'core/query' ];
+const BLOCK_NAME = 'wp-dynamic-filter/query';
+const I18N = 'wp-dynamic-filter';
 
 /** Seed only for brand-new empty containers — fully replaceable. */
 const TEMPLATE = [
@@ -81,9 +83,7 @@ function Edit( { attributes, setAttributes, clientId } ) {
 	} = attributes;
 
 	const allButtonLabel =
-		allLabel && allLabel.trim()
-			? allLabel
-			: __( 'Tous', 'dynamic-filter' );
+		allLabel && allLabel.trim() ? allLabel : __( 'All', I18N );
 
 	const [ terms, setTerms ] = useState( [] );
 	const [ loadingTerms, setLoadingTerms ] = useState( false );
@@ -116,8 +116,8 @@ function Edit( { attributes, setAttributes, clientId } ) {
 			} );
 		if ( ! opts.length ) {
 			opts.push(
-				{ label: __( 'Catégories', 'dynamic-filter' ), value: 'category' },
-				{ label: __( 'Étiquettes', 'dynamic-filter' ), value: 'post_tag' }
+				{ label: __( 'Categories', I18N ), value: 'category' },
+				{ label: __( 'Tags', I18N ), value: 'post_tag' }
 			);
 		}
 		return opts;
@@ -167,7 +167,7 @@ function Edit( { attributes, setAttributes, clientId } ) {
 	}, [ taxonomy, restBase ] );
 
 	const blockProps = useBlockProps( {
-		className: 'wp-block-dynamic-filter-query',
+		className: 'wp-block-wp-dynamic-filter-query',
 	} );
 
 	const innerBlocksProps = useInnerBlocksProps(
@@ -176,7 +176,6 @@ function Edit( { attributes, setAttributes, clientId } ) {
 		},
 		{
 			allowedBlocks: ALLOWED,
-			// Only seed a default query when the container is empty.
 			template: hasInnerQuery ? undefined : TEMPLATE,
 			templateLock: false,
 			renderAppender: hasInnerQuery
@@ -188,18 +187,15 @@ function Edit( { attributes, setAttributes, clientId } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody
-					title={ __( 'Filtre', 'dynamic-filter' ) }
-					initialOpen={ true }
-				>
+				<PanelBody title={ __( 'Filter', I18N ) } initialOpen={ true }>
 					<p className="ddf-inspector-hint">
 						{ __(
-							'Place ta Query Loop à l’intérieur (ou transforme une boucle existante). Tu peux supprimer la boucle par défaut et y glisser la tienne.',
-							'dynamic-filter'
+							'Place your Query Loop inside (or transform an existing loop). You can remove the default loop and drag yours in.',
+							I18N
 						) }
 					</p>
 					<SelectControl
-						label={ __( 'Taxonomie', 'dynamic-filter' ) }
+						label={ __( 'Taxonomy', I18N ) }
 						value={ taxonomy }
 						options={ taxonomyOptions }
 						onChange={ ( value ) =>
@@ -207,15 +203,15 @@ function Edit( { attributes, setAttributes, clientId } ) {
 						}
 					/>
 					<SelectControl
-						label={ __( 'Affichage', 'dynamic-filter' ) }
+						label={ __( 'Display', I18N ) }
 						value={ display }
 						options={ [
 							{
-								label: __( 'Boutons', 'dynamic-filter' ),
+								label: __( 'Buttons', I18N ),
 								value: 'buttons',
 							},
 							{
-								label: __( 'Menu déroulant', 'dynamic-filter' ),
+								label: __( 'Dropdown', I18N ),
 								value: 'select',
 							},
 						] }
@@ -224,10 +220,10 @@ function Edit( { attributes, setAttributes, clientId } ) {
 						}
 					/>
 					<ToggleControl
-						label={ __( 'Sélection multiple', 'dynamic-filter' ) }
+						label={ __( 'Multiple selection', I18N ) }
 						help={ __(
-							'Permet de cumuler plusieurs termes (OU logique).',
-							'dynamic-filter'
+							'Allow combining several terms (OR logic).',
+							I18N
 						) }
 						checked={ !! multiple }
 						onChange={ ( value ) =>
@@ -235,7 +231,7 @@ function Edit( { attributes, setAttributes, clientId } ) {
 						}
 					/>
 					<ToggleControl
-						label={ __( 'Afficher le bouton « tous »', 'dynamic-filter' ) }
+						label={ __( 'Show “All” button', I18N ) }
 						checked={ !! showAll }
 						onChange={ ( value ) =>
 							setAttributes( { showAll: value } )
@@ -243,23 +239,23 @@ function Edit( { attributes, setAttributes, clientId } ) {
 					/>
 					{ showAll && (
 						<TextControl
-							label={ __( 'Libellé du bouton « tous »', 'dynamic-filter' ) }
+							label={ __( '“All” button label', I18N ) }
 							value={ allLabel }
-							placeholder={ __( 'Tous', 'dynamic-filter' ) }
+							placeholder={ __( 'All', I18N ) }
 							onChange={ ( value ) =>
 								setAttributes( { allLabel: value } )
 							}
 						/>
 					) }
 					<ToggleControl
-						label={ __( 'Compteur d’articles', 'dynamic-filter' ) }
+						label={ __( 'Post counts', I18N ) }
 						checked={ !! showCounts }
 						onChange={ ( value ) =>
 							setAttributes( { showCounts: value } )
 						}
 					/>
 					<TextControl
-						label={ __( 'Message si vide', 'dynamic-filter' ) }
+						label={ __( 'Empty results message', I18N ) }
 						value={ emptyMessage }
 						onChange={ ( value ) =>
 							setAttributes( { emptyMessage: value } )
@@ -306,8 +302,8 @@ function Edit( { attributes, setAttributes, clientId } ) {
 				{ ! hasInnerQuery && (
 					<p className="ddf-query__placeholder">
 						{ __(
-							'Ajoute ou déplace ici ta boucle de requête (Query Loop).',
-							'dynamic-filter'
+							'Add or move your Query Loop here.',
+							I18N
 						) }
 					</p>
 				) }
@@ -329,7 +325,7 @@ export function registerQueryFilterBlock() {
 					blocks: [ 'core/query' ],
 					transform: ( attributes, innerBlocks ) =>
 						createBlock(
-							'dynamic-filter/query',
+							BLOCK_NAME,
 							{ instanceId: createInstanceId() },
 							[ createBlock( 'core/query', attributes, innerBlocks ) ]
 						),
